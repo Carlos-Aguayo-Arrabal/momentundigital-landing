@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     const { error } = await resend.emails.send({
       from: fromEmail,
       to: toEmail,
-      replyTo: email,
+      reply_to: email,
       subject: `Nuevo mensaje de contacto de ${name}`,
       text: `Nombre: ${name}\nEmail: ${email}\n\n${message}`,
     });
@@ -65,4 +65,3 @@ export async function POST(request: Request) {
     );
   }
 }
-
