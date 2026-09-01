@@ -45,7 +45,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>Momentum Digital</h1>
+      <h1>Momentun Digital</h1>
       <p>Cuentanos en que podemos ayudarte.</p>
 
       <form onSubmit={handleSubmit}>
@@ -72,4 +72,3 @@ export default function Home() {
     </main>
   );
 }
-
