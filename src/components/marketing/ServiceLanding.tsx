@@ -16,7 +16,11 @@ export interface ServiceContent {
 
 export function ServiceLanding({ content }: { content: ServiceContent }) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://momentundigital.com'
-  const schema = { '@context': 'https://schema.org', '@type': 'Service', name: content.title, description: content.intro, provider: { '@type': 'ProfessionalService', name: 'MOMENTUNDIGITAL', url: siteUrl }, areaServed: 'España', url: `${siteUrl}/${content.slug}` }
+  const schema = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'Service', '@id': `${siteUrl}/${content.slug}#service`, name: content.eyebrow, description: content.intro, serviceType: content.eyebrow, provider: { '@type': 'ProfessionalService', '@id': `${siteUrl}/#business`, name: 'MOMENTUNDIGITAL', url: siteUrl, email: 'contacto@momentundigital.com' }, areaServed: { '@type': 'Country', name: 'España' }, audience: { '@type': 'BusinessAudience', audienceType: 'Empresas, pymes y startups' }, url: `${siteUrl}/${content.slug}` },
+    { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Inicio', item: siteUrl }, { '@type': 'ListItem', position: 2, name: content.eyebrow, item: `${siteUrl}/${content.slug}` }] },
+    { '@type': 'FAQPage', mainEntity: content.decisions.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) },
+  ] }
   return <main className="service-page">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
     <a className="skip-link" href="#service-content">Saltar al contenido</a>
