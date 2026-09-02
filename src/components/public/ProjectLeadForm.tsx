@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 const initialForm = { name: '', email: '', phone: '', company: '', projectType: '', budget: '', timeline: '', message: '', website: '', consent: false }
 
@@ -17,6 +18,7 @@ export function ProjectLeadForm() {
     try {
       const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: form.name, email: form.email, phone: form.phone, message: details, website: form.website, consent: form.consent }) })
       if (!response.ok) throw new Error('Request failed')
+      trackEvent('generate_lead', { source: 'diagnostic_form', project_type: form.projectType })
       setForm(initialForm)
       setStatus('success')
     } catch { setStatus('error') }

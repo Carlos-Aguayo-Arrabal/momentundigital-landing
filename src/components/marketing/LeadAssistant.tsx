@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 type Answers = { projectType: string; problem: string; timeline: string; budget: string; email: string; consent: boolean; website: string }
 const initial: Answers = { projectType: '', problem: '', timeline: '', budget: '', email: '', consent: false, website: '' }
@@ -37,6 +38,7 @@ export function LeadAssistant() {
     try {
       const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Contacto desde asistente', email: answers.email, message, consent: answers.consent, website: answers.website }) })
       if (!response.ok) throw new Error('Request failed')
+      trackEvent('generate_lead', { source: 'guided_assistant', project_type: answers.projectType, recommendation: suggested.label })
       setStatus('sent')
     } catch { setStatus('error') }
   }

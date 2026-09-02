@@ -1,0 +1,8 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
+
+export const metadata: Metadata = { title: 'Política de cookies', description: 'Información sobre el uso de cookies y analítica en MOMENTUNDIGITAL.', alternates: { canonical: '/cookies' } }
+
+export default function CookiesPage() {
+  return <main className="legal-page"><header><Link href="/">MD / Volver a MOMENTUNDIGITAL</Link></header><article><p className="legal-kicker">Información legal</p><h1>Política de cookies</h1><p>Última actualización: 2 de septiembre de 2026.</p><h2>Uso de cookies</h2><p>MOMENTUNDIGITAL utiliza almacenamiento local para recordar si aceptas o rechazas la analítica. Las cookies de medición no se cargan hasta que das tu consentimiento.</p><h2>Google Analytics</h2><p>Si aceptas, Google Analytics recoge información agregada sobre navegación, páginas visitadas e interacciones con formularios y llamadas a la acción. La dirección IP se trata de forma anonimizada.</p><h2>Cómo cambiar tu decisión</h2><p>Puedes borrar los datos del sitio desde la configuración de privacidad de tu navegador para volver a mostrar la elección. También puedes bloquear o eliminar cookies desde el navegador.</p><h2>Más información</h2><p>Para cualquier consulta sobre privacidad o cookies, escribe a <a href="mailto:contacto@momentundigital.com">contacto@momentundigital.com</a>.</p></article></main>
+}
