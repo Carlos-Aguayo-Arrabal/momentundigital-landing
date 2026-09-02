@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Script from 'next/script'
 import { useEffect, useState } from 'react'
+import { captureFirstTouch } from '@/lib/attribution'
 
 const storageKey = 'momentundigital-analytics-consent'
 
@@ -16,6 +17,7 @@ export function GoogleAnalytics({ measurementId }: { measurementId?: string }) {
 
   useEffect(() => {
     if (!measurementId || consent !== 'accepted') return
+    captureFirstTouch()
     const trackClick = (event: MouseEvent) => {
       const link = (event.target as HTMLElement).closest('a')
       if (!link || !window.gtag) return

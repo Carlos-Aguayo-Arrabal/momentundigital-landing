@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
+import { getLeadAttribution } from '@/lib/attribution'
 
 const initialForm = { name: '', email: '', phone: '', company: '', projectType: '', budget: '', timeline: '', message: '', website: '', consent: false }
 
@@ -14,11 +15,12 @@ export function ProjectLeadForm() {
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('loading')
+    const attribution = getLeadAttribution()
     const details = [`Empresa o web: ${form.company || 'Sin especificar'}`, `Tipo de proyecto: ${form.projectType}`, `Inversión prevista: ${form.budget || 'Sin especificar'}`, `Plazo: ${form.timeline || 'Sin especificar'}`, '', form.message].join('\n')
     try {
-      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: form.name, email: form.email, phone: form.phone, message: details, website: form.website, consent: form.consent }) })
+      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: form.name, email: form.email, phone: form.phone, message: details, website: form.website, consent: form.consent, attribution }) })
       if (!response.ok) throw new Error('Request failed')
-      trackEvent('generate_lead', { source: 'diagnostic_form', project_type: form.projectType })
+      trackEvent('generate_lead', { form_source: 'diagnostic_form', project_type: form.projectType, lead_source: attribution.source, lead_medium: attribution.medium, lead_campaign: attribution.campaign })
       setForm(initialForm)
       setStatus('success')
     } catch { setStatus('error') }

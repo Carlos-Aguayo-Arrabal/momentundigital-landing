@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
+import { getLeadAttribution } from '@/lib/attribution'
 
 type Answers = { projectType: string; problem: string; timeline: string; budget: string; email: string; consent: boolean; website: string }
 const initial: Answers = { projectType: '', problem: '', timeline: '', budget: '', email: '', consent: false, website: '' }
@@ -34,11 +35,12 @@ export function LeadAssistant() {
     event.preventDefault()
     if (!answers.consent) return
     setStatus('sending')
+    const attribution = getLeadAttribution()
     const message = [`Asistente de diagnóstico`, `Origen: ${pathname}`, `Tipo: ${answers.projectType}`, `Problema: ${answers.problem}`, `Plazo: ${answers.timeline}`, `Presupuesto: ${answers.budget}`, `Recomendación: ${suggested.label}`].join('\n')
     try {
-      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Contacto desde asistente', email: answers.email, message, consent: answers.consent, website: answers.website }) })
+      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Contacto desde asistente', email: answers.email, message, consent: answers.consent, website: answers.website, attribution }) })
       if (!response.ok) throw new Error('Request failed')
-      trackEvent('generate_lead', { source: 'guided_assistant', project_type: answers.projectType, recommendation: suggested.label })
+      trackEvent('generate_lead', { form_source: 'guided_assistant', project_type: answers.projectType, recommendation: suggested.label, lead_source: attribution.source, lead_medium: attribution.medium, lead_campaign: attribution.campaign })
       setStatus('sent')
     } catch { setStatus('error') }
   }
