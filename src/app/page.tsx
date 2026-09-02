@@ -43,7 +43,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
       <header className="factory-nav">
-        <Link href="/" className="factory-logo" aria-label="MD MOMENTUNDIGITAL, inicio">
+        <Link href="/" className="factory-logo">
           <span className="factory-mark">MD</span>
           <span>MOMENTUNDIGITAL</span>
         </Link>
