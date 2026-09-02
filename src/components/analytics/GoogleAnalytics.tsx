@@ -6,8 +6,7 @@ import { useEffect, useState } from 'react'
 
 const storageKey = 'momentundigital-analytics-consent'
 
-export function GoogleAnalytics() {
-  const measurementId = process.env.NEXT_PUBLIC_GA_ID
+export function GoogleAnalytics({ measurementId }: { measurementId?: string }) {
   const [consent, setConsent] = useState<'accepted' | 'rejected' | null>(null)
 
   useEffect(() => {
