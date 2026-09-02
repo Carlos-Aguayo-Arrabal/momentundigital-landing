@@ -10,4 +10,5 @@ npm-debug.log*
 *.zip
 .*-check.png
 .dev-server.log
+*.tsbuildinfo
 
