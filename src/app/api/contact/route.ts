@@ -39,6 +39,15 @@ export async function POST(request: NextRequest) {
       console.error('Contact email failed:', error)
       return NextResponse.json({ error: 'No se pudo enviar la solicitud. Escríbenos a contacto@momentundigital.com.' }, { status: 502 })
     }
+    if (process.env.LEADS_WEBHOOK_URL) {
+      try {
+        await fetch(process.env.LEADS_WEBHOOK_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ created_at: new Date().toISOString(), status: 'nuevo', name: name.trim(), email: email.trim(), phone: phone?.trim() || '', message: message.trim(), attribution: attribution || {} }),
+          signal: AbortSignal.timeout(5000),
+        })
+      } catch (webhookError) { console.error('Lead CRM webhook failed:', webhookError) }
+    }
     return NextResponse.json({ success: true })
   } catch { return NextResponse.json({ error: 'Error del servidor' }, { status: 500 }) }
 }
