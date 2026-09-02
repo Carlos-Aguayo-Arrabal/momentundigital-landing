@@ -28,6 +28,12 @@ const solutions = [
   ['Evolución de producto', 'Mejora una aplicación existente sin detener la operación ni perder su base actual.'],
 ]
 
+const workSamples = [
+  { number: '01', label: 'Alcance', title: 'Un mapa funcional que deja claro qué entra y qué no.', text: 'Usuarios, recorrido principal, reglas, integraciones y riesgos ordenados antes de comprometer desarrollo.', details: ['Flujo prioritario', 'Fuera de alcance', 'Criterios de aceptación'] },
+  { number: '02', label: 'Producto', title: 'Un prototipo que se puede discutir, no imaginar.', text: 'Pantallas y decisiones de experiencia revisadas sobre el recorrido real antes de concentrar la inversión en código.', details: ['Navegación completa', 'Estados y excepciones', 'Revisión conjunta'] },
+  { number: '03', label: 'Entrega', title: 'Software funcionando desde las primeras iteraciones.', text: 'Cada revisión ocurre sobre una versión utilizable. Puedes ver el avance, probarlo y corregir prioridades con contexto.', details: ['Entorno de pruebas', 'Avance documentado', 'Código transferible'] },
+]
+
 const faqs = [
   ['¿Cuánto tarda un primer lanzamiento?', 'Un MVP bien definido suele estar listo en unas 6 semanas. El plazo final depende del alcance, las integraciones y la validación necesaria.'],
   ['¿Cómo se define el presupuesto?', 'Después del diagnóstico recibirás una propuesta cerrada por alcance, entregables y calendario. Así sabes qué se construirá antes de empezar.'],
@@ -67,6 +73,7 @@ export default function HomePage() {
             <a href="#diagnostico" className="factory-button">Solicitar diagnóstico gratuito <span>↗</span></a>
             <a href="#proceso" className="factory-text-link">Ver cómo trabajamos <span>↓</span></a>
           </div>
+          <small className="hero-reassurance">30 minutos · Sin compromiso · Respuesta en 2 días laborables</small>
         </div>
 
         <div className="studio-statement" aria-label="Forma de trabajo de MOMENTUNDIGITAL">
@@ -112,6 +119,12 @@ export default function HomePage() {
             <div key={title}><small>{time}</small><strong>{title}</strong><span>{description}</span></div>
           ))}
         </div>
+      </section>
+
+      <section className="work-evidence" id="muestras">
+        <header><p>El trabajo, antes que las promesas</p><h2>Desde la primera semana hay algo concreto que revisar.</h2><span>No necesitas esperar al final para saber si el proyecto avanza en la dirección correcta.</span></header>
+        <div className="evidence-grid">{workSamples.map((sample) => <article key={sample.number}><div><small>{sample.number} / {sample.label}</small><span aria-hidden="true">↗</span></div><h3>{sample.title}</h3><p>{sample.text}</p><ul>{sample.details.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>)}</div>
+        <footer><p>En el diagnóstico te enseñamos cómo aplicar estas entregas a tu caso.</p><a href="#diagnostico" className="factory-text-link">Ver qué recibirías <span>↓</span></a></footer>
       </section>
 
       <section className="offer-section">

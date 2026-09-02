@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
 import { getLeadAttribution } from '@/lib/attribution'
 
@@ -10,6 +10,7 @@ const initialForm = { name: '', email: '', phone: '', company: '', projectType: 
 export function ProjectLeadForm() {
   const [form, setForm] = useState(initialForm)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const started = useRef(false)
   const update = (field: keyof typeof form, value: string | boolean) => setForm((current) => ({ ...current, [field]: value }))
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -29,7 +30,7 @@ export function ProjectLeadForm() {
   if (status === 'success') return <div className="lead-success" role="status"><strong>Solicitud recibida.</strong><p>Revisaremos el contexto y te responderemos en un máximo de 2 días laborables con los siguientes pasos.</p><a href="mailto:contacto@momentundigital.com">¿Necesitas añadir algo? Escríbenos</a><button onClick={() => setStatus('idle')}>Enviar otra solicitud</button></div>
 
   return (
-    <form className="lead-form" onSubmit={submit}>
+    <form className="lead-form" onSubmit={submit} onFocus={() => { if (!started.current) { started.current = true; trackEvent('form_start', { form_source: 'diagnostic_form' }) } }}>
       <div className="lead-field"><label htmlFor="lead-name">Nombre</label><input id="lead-name" required minLength={2} autoComplete="name" value={form.name} onChange={(e) => update('name', e.target.value)} placeholder="¿Cómo te llamas?" /></div>
       <div className="lead-field"><label htmlFor="lead-email">Email</label><input id="lead-email" required type="email" autoComplete="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="nombre@empresa.com" /></div>
       <div className="lead-field"><label htmlFor="lead-company">Empresa o web <span>Opcional</span></label><input id="lead-company" value={form.company} onChange={(e) => update('company', e.target.value)} placeholder="empresa.com" /></div>

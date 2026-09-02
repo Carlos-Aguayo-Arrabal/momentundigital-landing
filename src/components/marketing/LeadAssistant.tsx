@@ -46,7 +46,7 @@ export function LeadAssistant() {
   }
 
   return <div className={`lead-assistant ${open ? 'is-open' : ''}`}>
-    <button className="assistant-trigger" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="lead-assistant-panel"><span>MD</span><b>{open ? 'Cerrar' : '¿Tienes una idea?'}</b></button>
+    <button className="assistant-trigger" onClick={() => { if (!open) trackEvent('assistant_open', { page_path: pathname }); setOpen(!open) }} aria-expanded={open} aria-controls="lead-assistant-panel"><span>MD</span><b>{open ? 'Cerrar' : '¿Tienes una idea?'}</b></button>
     {open && <section id="lead-assistant-panel" className="assistant-panel" aria-label="Asistente de diagnóstico" aria-live="polite">
       <header><div><span>MD / ASISTENTE</span><small>Paso {Math.min(step + 1, 5)} de 5</small></div><button onClick={() => setOpen(false)} aria-label="Cerrar asistente">×</button></header>
       {status === 'sent' ? <div className="assistant-result"><span>Solicitud recibida</span><h2>Ya tenemos el contexto.</h2><p>Revisaremos tus respuestas y te escribiremos en un máximo de 2 días laborables.</p><button onClick={reset}>Nueva consulta</button></div> : <>
