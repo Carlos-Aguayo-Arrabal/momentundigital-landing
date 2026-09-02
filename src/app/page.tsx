@@ -43,7 +43,7 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
       <header className="factory-nav">
-        <Link href="/" className="factory-logo" aria-label="MOMENTUNDIGITAL, inicio">
+        <Link href="/" className="factory-logo" aria-label="MD MOMENTUNDIGITAL, inicio">
           <span className="factory-mark">MD</span>
           <span>MOMENTUNDIGITAL</span>
         </Link>
@@ -54,11 +54,11 @@ export default function HomePage() {
           <a href="#diagnostico">Contacto</a>
         </nav>
         <a href="#diagnostico" className="factory-button factory-button-small">Diagnóstico gratuito</a>
-        <details className="mobile-nav"><summary aria-label="Abrir navegación">Menú</summary><nav aria-label="Navegación móvil"><a href="#soluciones">Soluciones</a><a href="#proceso">Proceso</a><Link href="/recursos">Recursos</Link><a href="#diagnostico">Diagnóstico</a></nav></details>
+        <details className="mobile-nav"><summary aria-label="Menú: abrir navegación">Menú</summary><nav aria-label="Navegación móvil"><a href="#soluciones">Soluciones</a><a href="#proceso">Proceso</a><Link href="/recursos">Recursos</Link><a href="#diagnostico">Diagnóstico</a></nav></details>
       </header>
 
       <section className="factory-hero" id="contenido">
-        <Image className="factory-hero-image" src="/images/momentun-hero-system.png" alt="Composición de piezas metálicas y acrílicas que representa un sistema digital modular" fill priority sizes="(max-width: 1000px) 100vw, 1400px" />
+        <Image className="factory-hero-image" src="/images/momentun-hero-system.png" alt="Composición de piezas metálicas y acrílicas que representa un sistema digital modular" fill priority fetchPriority="high" sizes="(max-width: 1000px) 100vw, 1400px" />
         <div className="factory-hero-copy">
           <p className="factory-kicker"><span /> Producto digital de principio a fin</p>
           <h1>Convertimos procesos complejos en <em>software fácil de usar.</em></h1>
@@ -80,7 +80,7 @@ export default function HomePage() {
 
       <section className="solutions-section" id="soluciones">
         <div className="solutions-heading"><p>El tipo de trabajo</p><h2>Software que encaja con la operación, no al revés.</h2><span>No vendemos una tecnología concreta. Elegimos lo que necesita cada producto.</span></div>
-        <div className="solutions-grid">{solutions.map(([title, text], index) => { const hrefs = ['/software-empresarial', '/software-empresarial', '/automatizacion-ia', '/software-empresarial', '/desarrollo-saas', '/desarrollo-saas']; return <article key={title}><h3>{title}</h3><p>{text}</p><Link href={hrefs[index]} aria-label={`Conocer más sobre ${title}`}>Ver cómo lo abordamos <span>↗</span></Link></article> })}</div>
+        <div className="solutions-grid">{solutions.map(([title, text], index) => { const hrefs = ['/software-empresarial', '/software-empresarial', '/automatizacion-ia', '/software-empresarial', '/desarrollo-saas', '/desarrollo-saas']; return <article key={title}><h3>{title}</h3><p>{text}</p><Link href={hrefs[index]} aria-label={`Ver cómo lo abordamos: ${title}`}>Ver cómo lo abordamos <span>↗</span></Link></article> })}</div>
       </section>
 
       <section className="factory-proof" aria-label="Propuesta de valor">
