@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Contacto | Desarrollo SaaS, MVP y automatización con IA',
   description: 'Cuéntanos qué necesitas construir. Respondemos en un máximo de 2 días laborables con los siguientes pasos para tu proyecto digital.',
   alternates: { canonical: '/contacto' },
-  openGraph: { title: 'Contacto | MOMENTUNDIGITAL', description: 'Hablemos de tu SaaS, MVP, software empresarial o automatización con IA.', url: '/contacto', type: 'website' },
+  openGraph: { title: 'Contacto | MOMENTUNDIGITAL', description: 'Hablemos de tu SaaS, MVP, software empresarial o automatización con IA.', url: '/contacto', type: 'website', images: ['/images/momentun-hero-system.png'] },
 }
 
 export default function ContactPage() {
