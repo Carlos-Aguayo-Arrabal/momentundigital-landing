@@ -12,6 +12,9 @@ export function GoogleAnalytics({ measurementId }: { measurementId?: string }) {
 
   useEffect(() => {
     const saved = window.localStorage.getItem(storageKey)
+    // Deferred to an effect (not a lazy useState initializer) so server and first client
+    // render both output null and avoid a hydration mismatch on the consent banner.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (saved === 'accepted' || saved === 'rejected') setConsent(saved)
   }, [])
 
