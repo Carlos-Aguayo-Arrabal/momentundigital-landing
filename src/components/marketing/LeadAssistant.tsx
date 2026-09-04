@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
 import { getLeadAttribution } from '@/lib/attribution'
+import { BOOKING_URL } from '@/lib/booking'
 
 type Answers = { projectType: string; problem: string; timeline: string; budget: string; email: string; consent: boolean; website: string }
 const initial: Answers = { projectType: '', problem: '', timeline: '', budget: '', email: '', consent: false, website: '' }
@@ -56,7 +57,7 @@ export function LeadAssistant() {
     <button className="assistant-trigger" onClick={() => { if (!open) trackEvent('assistant_open', { page_path: pathname }); setOpen(!open) }} aria-expanded={open} aria-controls="lead-assistant-panel"><span>MD</span><b>{open ? 'Cerrar' : '¿Tienes una idea?'}</b></button>
     {open && <section id="lead-assistant-panel" className="assistant-panel" aria-label="Asistente de diagnóstico" aria-live="polite">
       <header><div><span>MD / ASISTENTE</span><small>Paso {Math.min(step + 1, 5)} de 5</small></div><button onClick={() => setOpen(false)} aria-label="Cerrar asistente">×</button></header>
-      {status === 'sent' ? <div className="assistant-result"><span>Solicitud recibida</span><h2>Ya tenemos el contexto.</h2><p>Revisaremos tus respuestas y te escribiremos en un máximo de 2 días laborables.</p><button onClick={reset}>Nueva consulta</button></div> : <>
+      {status === 'sent' ? <div className="assistant-result"><span>Solicitud recibida</span><h2>Ya tenemos el contexto.</h2><p>Revisaremos tus respuestas y te escribiremos en un máximo de 2 días laborables. Si prefieres no esperar, reserva ya tu llamada.</p><a className="assistant-next lead-booking-cta" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Reservar llamada de 30 min <span>↗</span></a><button onClick={reset}>Nueva consulta</button></div> : <>
         <div className="assistant-progress"><i style={{ transform: `scaleX(${(step + 1) / 5})` }} /></div>
         {step === 0 && <div className="assistant-step"><small>Para empezar</small><h2>¿Qué necesitas resolver?</h2><div className="assistant-options">{projectOptions.map((option) => <button key={option} onClick={() => { update('projectType', option); next() }}>{option}<span>↗</span></button>)}</div></div>}
         {step === 1 && <div className="assistant-step"><small>El contexto</small><h2>¿Qué tarea o problema quieres mejorar?</h2><textarea autoFocus rows={5} value={answers.problem} onChange={(e) => update('problem', e.target.value)} placeholder="Describe brevemente qué ocurre hoy y quién participa." /><button className="assistant-next" disabled={answers.problem.trim().length < 10} onClick={next}>Continuar <span>↗</span></button></div>}

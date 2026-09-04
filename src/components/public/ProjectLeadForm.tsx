@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { trackEvent } from '@/lib/analytics'
 import { getLeadAttribution } from '@/lib/attribution'
+import { BOOKING_URL } from '@/lib/booking'
 
 const initialForm = { name: '', email: '', phone: '', company: '', projectType: '', budget: '', timeline: '', message: '', website: '', consent: false }
 
@@ -27,7 +28,7 @@ export function ProjectLeadForm() {
     } catch { setStatus('error') }
   }
 
-  if (status === 'success') return <div className="lead-success" role="status"><strong>Solicitud recibida.</strong><p>Revisaremos el contexto y te responderemos en un máximo de 2 días laborables con los siguientes pasos.</p><a href="mailto:contacto@momentundigital.com">¿Necesitas añadir algo? Escríbenos</a><button onClick={() => setStatus('idle')}>Enviar otra solicitud</button></div>
+  if (status === 'success') return <div className="lead-success" role="status"><strong>Solicitud recibida.</strong><p>Revisaremos el contexto y te responderemos en un máximo de 2 días laborables con los siguientes pasos.</p><a className="factory-button lead-booking-cta" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">No hace falta esperar: reserva tu llamada <span>↗</span></a><a href="mailto:contacto@momentundigital.com">¿Necesitas añadir algo? Escríbenos</a><button onClick={() => setStatus('idle')}>Enviar otra solicitud</button></div>
 
   return (
     <form className="lead-form" onSubmit={submit} onFocus={() => { if (!started.current) { started.current = true; trackEvent('form_start', { form_source: 'diagnostic_form' }) } }}>

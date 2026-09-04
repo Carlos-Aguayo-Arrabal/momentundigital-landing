@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ProjectLeadForm } from '@/components/public/ProjectLeadForm'
 import { LeadAssistant } from '@/components/marketing/LeadAssistant'
+import { BOOKING_URL } from '@/lib/booking'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://momentundigital.com'
 
@@ -144,7 +145,7 @@ export default function HomePage() {
       <section className="home-resources"><header><p>Recursos para decidir</p><h2>Antes de contratar desarrollo, conviene hacer mejores preguntas.</h2><Link href="/recursos">Ver todos los recursos <span>↗</span></Link></header><div><Link href="/recursos/cuanto-cuesta-desarrollar-saas"><small>COSTE SAAS</small><h3>Cuánto cuesta desarrollar un SaaS y qué debe incluir</h3><span>8 min ↗</span></Link><Link href="/recursos/precio-desarrollo-mvp"><small>PRESUPUESTO MVP</small><h3>Cómo estimar el precio de una primera versión funcional</h3><span>7 min ↗</span></Link><Link href="/recursos/ejemplos-automatizacion-ia-empresas"><small>IA PARA EMPRESAS</small><h3>Ejemplos de automatización con IA que pueden ser rentables</h3><span>8 min ↗</span></Link></div></section>
 
       <section className="diagnostic-section" id="diagnostico">
-        <div className="diagnostic-copy"><p>Diagnóstico inicial gratuito</p><h2>Aclara tu idea antes de invertir.</h2><span>Una videollamada de 30 minutos para revisar:</span><ul><li>El problema y el cliente objetivo</li><li>Las funciones imprescindibles del MVP</li><li>La arquitectura y las integraciones</li><li>Una horquilla realista de inversión</li><li>El plan inicial de lanzamiento</li></ul><strong>Después recibirás un resumen con alcance, prioridades y próximos pasos. Respuesta en un máximo de 2 días laborables.</strong></div>
+        <div className="diagnostic-copy"><p>Diagnóstico inicial gratuito</p><h2>Aclara tu idea antes de invertir.</h2><span>Una videollamada de 30 minutos para revisar:</span><ul><li>El problema y el cliente objetivo</li><li>Las funciones imprescindibles del MVP</li><li>La arquitectura y las integraciones</li><li>Una horquilla realista de inversión</li><li>El plan inicial de lanzamiento</li></ul><strong>Después recibirás un resumen con alcance, prioridades y próximos pasos. Respuesta en un máximo de 2 días laborables.</strong><a className="factory-text-link diagnostic-booking-link" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">¿Ya lo tienes claro? Reserva directamente la llamada <span>↗</span></a></div>
         <ProjectLeadForm />
       </section>
 
