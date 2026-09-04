@@ -3,14 +3,20 @@ import { NextRequest, NextResponse } from 'next/server'
 const attempts = new Map<string, { count: number; resetAt: number }>()
 const escapeHtml = (value: string) => value.replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char] || char)
 const VALID_PROJECT_TYPES = ['MVP de una nueva idea', 'Herramienta interna', 'Portal para clientes', 'Automatización con IA', 'Mejorar un producto existente', 'Otro proyecto digital']
+const RATE_LIMIT_MAX = 10
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000
 
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
     const now = Date.now()
-    const rate = attempts.get(ip)
-    if (rate && rate.resetAt > now && rate.count >= 5) return NextResponse.json({ error: 'Demasiadas solicitudes. Inténtalo más tarde.' }, { status: 429 })
-    attempts.set(ip, !rate || rate.resetAt <= now ? { count: 1, resetAt: now + 60 * 60 * 1000 } : { ...rate, count: rate.count + 1 })
+    const bypassToken = process.env.CONTACT_TEST_BYPASS_TOKEN
+    const isTestBypass = Boolean(bypassToken) && request.headers.get('x-test-bypass') === bypassToken
+    if (!isTestBypass) {
+      const rate = attempts.get(ip)
+      if (rate && rate.resetAt > now && rate.count >= RATE_LIMIT_MAX) return NextResponse.json({ error: 'Demasiadas solicitudes. Inténtalo más tarde.' }, { status: 429 })
+      attempts.set(ip, !rate || rate.resetAt <= now ? { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS } : { ...rate, count: rate.count + 1 })
+    }
 
     const body = await request.json()
     const { name, email, phone, projectType, message, website, consent, attribution } = body
