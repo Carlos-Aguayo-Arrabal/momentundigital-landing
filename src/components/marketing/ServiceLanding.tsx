@@ -24,7 +24,7 @@ export function ServiceLanding({ content }: { content: ServiceContent }) {
   return <main className="service-page">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
     <a className="skip-link" href="#service-content">Saltar al contenido</a>
-    <header className="service-nav"><Link href="/" className="factory-logo"><span className="factory-mark">MD</span><span>MOMENTUNDIGITAL</span></Link><Link href="/#diagnostico" className="service-nav-cta">Cuéntanos el proyecto <span>↗</span></Link></header>
+    <header className="service-nav" id="top"><Link href="/" className="factory-logo"><span className="factory-mark">MD</span><span>MOMENTUNDIGITAL</span></Link><Link href="/#diagnostico" className="service-nav-cta">Cuéntanos el proyecto <span>↗</span></Link></header>
     <article id="service-content">
       <section className="service-hero"><div className="service-breadcrumb"><Link href="/">Inicio</Link><span>/</span><span>{content.eyebrow}</span></div><h1>{content.title}</h1><p>{content.intro}</p><Link href="/#diagnostico" className="factory-button">Solicitar diagnóstico gratuito <span>↗</span></Link></section>
       <section className="service-definition"><p>En pocas palabras</p><h2>{content.definition}</h2></section>
@@ -35,6 +35,6 @@ export function ServiceLanding({ content }: { content: ServiceContent }) {
       <aside className="service-related"><p>También puede interesarte</p><div>{content.related.map((item) => <Link key={item.href} href={item.href}>{item.label}<span>↗</span></Link>)}</div></aside>
       <section className="service-close"><p>Primera conversación, sin compromiso</p><h2>Veamos si merece la pena construirlo.</h2><span>En 30 minutos revisamos el problema, el alcance inicial y los riesgos principales.</span><Link href="/#diagnostico" className="factory-button">Solicitar diagnóstico <b>↗</b></Link></section>
     </article>
-    <footer className="service-footer"><Link href="/">MOMENTUNDIGITAL</Link><a href="mailto:contacto@momentundigital.com">contacto@momentundigital.com</a><Link href="/privacidad">Privacidad</Link></footer><LeadAssistant />
+    <footer className="service-footer"><Link href="/">MOMENTUNDIGITAL</Link><a href="mailto:contacto@momentundigital.com">contacto@momentundigital.com</a><Link href="/privacidad">Privacidad</Link><a href="#top">Volver arriba <span>↑</span></a></footer><LeadAssistant />
   </main>
 }

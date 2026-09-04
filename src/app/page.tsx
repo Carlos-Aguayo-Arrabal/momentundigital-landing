@@ -49,7 +49,7 @@ export default function HomePage() {
     <main className="factory-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
-      <header className="factory-nav">
+      <header className="factory-nav" id="top">
         <Link href="/" className="factory-logo">
           <span className="factory-mark">MD</span>
           <span>MOMENTUNDIGITAL</span>
@@ -151,7 +151,7 @@ export default function HomePage() {
 
       <footer className="factory-footer">
         <div className="factory-logo"><span className="factory-mark">MD</span><span>MOMENTUNDIGITAL</span></div>
-        <div className="footer-contact"><a href="mailto:contacto@momentundigital.com">contacto@momentundigital.com</a><Link href="/privacidad">Privacidad</Link></div>
+        <div className="footer-contact"><a href="mailto:contacto@momentundigital.com">contacto@momentundigital.com</a><Link href="/privacidad">Privacidad</Link><a href="#top">Volver arriba ↑</a></div>
         <span>© 2026 MOMENTUNDIGITAL</span>
       </footer>
       <LeadAssistant />
