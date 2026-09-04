@@ -17,9 +17,9 @@ export function ProjectLeadForm() {
     event.preventDefault()
     setStatus('loading')
     const attribution = getLeadAttribution()
-    const details = [`Empresa o web: ${form.company || 'Sin especificar'}`, `Tipo de proyecto: ${form.projectType}`, `Inversión prevista: ${form.budget || 'Sin especificar'}`, `Plazo: ${form.timeline || 'Sin especificar'}`, '', form.message].join('\n')
+    const details = [`Empresa o web: ${form.company || 'Sin especificar'}`, `Inversión prevista: ${form.budget || 'Sin especificar'}`, `Plazo: ${form.timeline || 'Sin especificar'}`, '', form.message].join('\n')
     try {
-      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: form.name, email: form.email, phone: form.phone, message: details, website: form.website, consent: form.consent, attribution }) })
+      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: form.name, email: form.email, phone: form.phone, projectType: form.projectType, message: details, website: form.website, consent: form.consent, attribution }) })
       if (!response.ok) throw new Error('Request failed')
       trackEvent('generate_lead', { form_source: 'diagnostic_form', project_type: form.projectType, lead_source: attribution.source, lead_medium: attribution.medium, lead_campaign: attribution.campaign })
       setForm(initialForm)

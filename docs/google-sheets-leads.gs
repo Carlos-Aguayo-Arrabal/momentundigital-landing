@@ -10,9 +10,9 @@ function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents || '{}');
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Leads') || SpreadsheetApp.getActiveSpreadsheet().insertSheet('Leads');
-    if (sheet.getLastRow() === 0) sheet.appendRow(['Fecha', 'Estado', 'Nombre', 'Email', 'Teléfono', 'Fuente', 'Medio', 'Campaña', 'Página de entrada', 'Mensaje']);
+    if (sheet.getLastRow() === 0) sheet.appendRow(['Fecha', 'Estado', 'Nombre', 'Email', 'Teléfono', 'Tipo de proyecto', 'Fuente', 'Medio', 'Campaña', 'Página de entrada', 'Mensaje']);
     var attribution = data.attribution || {};
-    sheet.appendRow([new Date(data.created_at || Date.now()), data.status || 'nuevo', data.name || '', data.email || '', data.phone || '', attribution.source || '', attribution.medium || '', attribution.campaign || '', attribution.landingPath || '', data.message || '']);
+    sheet.appendRow([new Date(data.created_at || Date.now()), data.status || 'nuevo', data.name || '', data.email || '', data.phone || '', data.projectType || '', attribution.source || '', attribution.medium || '', attribution.campaign || '', attribution.landingPath || '', data.message || '']);
     return ContentService.createTextOutput(JSON.stringify({ ok: true })).setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({ ok: false })).setMimeType(ContentService.MimeType.JSON);
