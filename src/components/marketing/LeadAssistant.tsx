@@ -9,6 +9,13 @@ import { getLeadAttribution } from '@/lib/attribution'
 type Answers = { projectType: string; problem: string; timeline: string; budget: string; email: string; consent: boolean; website: string }
 const initial: Answers = { projectType: '', problem: '', timeline: '', budget: '', email: '', consent: false, website: '' }
 const projectOptions = ['Crear un SaaS', 'Automatizar un proceso', 'Mejorar una aplicación', 'Crear una herramienta interna', 'No lo tengo claro']
+const projectTypeForApi: Record<string, string> = {
+  'Crear un SaaS': 'MVP de una nueva idea',
+  'Automatizar un proceso': 'Automatización con IA',
+  'Mejorar una aplicación': 'Mejorar un producto existente',
+  'Crear una herramienta interna': 'Herramienta interna',
+  'No lo tengo claro': 'Otro proyecto digital',
+}
 const timelineOptions = ['Lo antes posible', 'En 1 a 3 meses', 'En 3 a 6 meses', 'Solo estoy explorando']
 const budgetOptions = ['Menos de 5.000 €', '5.000 € a 10.000 €', '10.000 € a 25.000 €', 'Más de 25.000 €', 'Necesito orientación']
 
@@ -38,7 +45,7 @@ export function LeadAssistant() {
     const attribution = getLeadAttribution()
     const message = [`Asistente de diagnóstico`, `Origen: ${pathname}`, `Tipo: ${answers.projectType}`, `Problema: ${answers.problem}`, `Plazo: ${answers.timeline}`, `Presupuesto: ${answers.budget}`, `Recomendación: ${suggested.label}`].join('\n')
     try {
-      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Contacto desde asistente', email: answers.email, message, consent: answers.consent, website: answers.website, attribution }) })
+      const response = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: 'Contacto desde asistente', email: answers.email, projectType: projectTypeForApi[answers.projectType], message, consent: answers.consent, website: answers.website, attribution }) })
       if (!response.ok) throw new Error('Request failed')
       trackEvent('generate_lead', { form_source: 'guided_assistant', project_type: answers.projectType, recommendation: suggested.label, lead_source: attribution.source, lead_medium: attribution.medium, lead_campaign: attribution.campaign })
       setStatus('sent')
