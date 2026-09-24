@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     siteName: 'MOMENTUNDIGITAL',
     type: 'website',
     url: '/',
-    images: [{ url: '/images/momentun-hero-system.png', width: 1672, height: 941, alt: 'Sistema digital modular de MOMENTUNDIGITAL' }],
+    images: [{ url: '/images/momentun-hero-system.webp', width: 1672, height: 941, alt: 'Sistema digital modular de MOMENTUNDIGITAL' }],
   },
-  twitter: { card: 'summary_large_image', title: 'MOMENTUNDIGITAL | Desarrollo SaaS a medida', description: 'Productos SaaS, MVP y automatización con IA para empresas.', images: ['/images/momentun-hero-system.png'] },
+  twitter: { card: 'summary_large_image', title: 'MOMENTUNDIGITAL | Desarrollo SaaS a medida', description: 'Productos SaaS, MVP y automatización con IA para empresas.', images: ['/images/momentun-hero-system.webp'] },
 }
 
 export default function RootLayout({

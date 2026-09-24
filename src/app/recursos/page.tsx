@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { LeadAssistant } from '@/components/marketing/LeadAssistant'
 import { resourceContent } from '@/config/resourceContent'
 
-export const metadata: Metadata = { title: 'Guías sobre SaaS, MVP y automatización con IA', description: 'Recursos prácticos para tomar mejores decisiones antes de desarrollar un SaaS, definir un MVP o automatizar procesos con IA.', alternates: { canonical: '/recursos' }, openGraph: { title: 'Guías sobre SaaS, MVP y automatización con IA', description: 'Recursos prácticos para tomar mejores decisiones antes de desarrollar un SaaS, definir un MVP o automatizar procesos con IA.', url: '/recursos', type: 'website', images: ['/images/momentun-hero-system.png'] } }
+export const metadata: Metadata = { title: 'Guías sobre SaaS, MVP y automatización con IA', description: 'Recursos prácticos para tomar mejores decisiones antes de desarrollar un SaaS, definir un MVP o automatizar procesos con IA.', alternates: { canonical: '/recursos' }, openGraph: { title: 'Guías sobre SaaS, MVP y automatización con IA', description: 'Recursos prácticos para tomar mejores decisiones antes de desarrollar un SaaS, definir un MVP o automatizar procesos con IA.', url: '/recursos', type: 'website', images: ['/images/momentun-hero-system.webp'] } }
 export default function ResourcesPage() {
   const resources = Object.values(resourceContent)
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://momentundigital.com'

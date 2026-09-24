@@ -65,7 +65,7 @@ export default function HomePage() {
       </header>
 
       <section className="factory-hero" id="contenido">
-        <Image className="factory-hero-image" src="/images/momentun-hero-system.png" alt="Composición de piezas metálicas y acrílicas que representa un sistema digital modular" fill priority fetchPriority="high" sizes="(max-width: 1000px) 100vw, 1400px" />
+        <Image className="factory-hero-image" src="/images/momentun-hero-system.webp" alt="Composición de piezas metálicas y acrílicas que representa un sistema digital modular" fill priority fetchPriority="high" sizes="(max-width: 1000px) 100vw, 1400px" />
         <div className="factory-hero-copy">
           <p className="factory-kicker"><span /> Producto digital de principio a fin</p>
           <h1>Convertimos procesos complejos en <em>software fácil de usar.</em></h1>
