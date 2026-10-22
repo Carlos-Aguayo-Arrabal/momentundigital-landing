@@ -39,3 +39,37 @@ Se encontraron entidades de nombre parecido («Moment Digital», «Momento Digit
 
 ## Alcance de la auditoría
 Se revisaron repositorios accesibles en GitHub y resultados públicos de buscadores. No se ha accedido a las cuentas privadas de plataformas, ni se ha registrado una cuenta nueva.
+
+## Control de credenciales en Bitwarden
+**Nunca registrar contraseñas, passkeys, códigos MFA, secretos OAuth, tokens API, correos privados ni códigos de recuperación en este documento o en incidencias de GitHub.**
+
+Convención para cada elemento en la bóveda personal:
+- `MOMENTUN | SOCIAL | Instagram`
+- `MOMENTUN | SOCIAL | Facebook`
+- `MOMENTUN | DEV | Meta Developers`
+- `MOMENTUN | SOCIAL | LinkedIn`
+- `MOMENTUN | DEV | LinkedIn Developers`
+- `MOMENTUN | SOCIAL | TikTok`
+- `MOMENTUN | DEV | TikTok Developers`
+- `MOMENTUN | GOOGLE | Cloud / YouTube`
+- `MOMENTUN | INFRA | Hostinger / EasyPanel`
+
+Estado operativo (solo metadatos no sensibles):
+
+| Plataforma | Cuenta comprobada | En Bitwarden | MFA habilitada | Conectada a Social Studio |
+| --- | --- | --- | --- | --- |
+| Facebook Page / Meta Business | Pendiente | Pendiente | Pendiente | Pendiente |
+| Instagram profesional | Pendiente | Pendiente | Pendiente | Pendiente |
+| Meta Developers | Pendiente | Pendiente | Pendiente | Pendiente |
+| LinkedIn Company | Pendiente | Pendiente | Pendiente | No implementado |
+| LinkedIn Developers | Pendiente | Pendiente | Pendiente | No implementado |
+| Google Cloud / YouTube | Pendiente | Pendiente | Pendiente | Pendiente de verificación |
+| TikTok / Developers | Pendiente | Pendiente | Pendiente | No implementado |
+
+### Primera sesión de configuración
+1. Acceder a la bóveda de Bitwarden y activar MFA para la propia bóveda si no está activa.
+2. En Meta Business Suite, identificar si ya existe un portfolio empresarial, página Facebook e Instagram profesional de Momentun Digital. Evitar duplicados.
+3. Guardar cada acceso confirmado en Bitwarden y habilitar MFA donde se permita.
+4. En Meta for Developers, identificar si ya existe la app usada por Social Studio; anotar solo el App ID público y el estado de permisos, nunca el App Secret.
+5. Añadir en este inventario únicamente estados y enlaces públicos realmente verificados.
+6. No conectar cuentas de producción a Social Studio hasta validar el flujo OAuth y la rama de seguridad.
